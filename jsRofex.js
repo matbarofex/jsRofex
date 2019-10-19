@@ -4,7 +4,7 @@ class jsRofex {
         this.autenticado = false;
         this.Entorno_token = "";
         this.base_url = "";
-        this.accounts = "";
+        this.accounts = {};
         if (pDominio == "reMarkets" || pDominio == "production") {
             if (pDominio == "reMarkets") {
                 this.base_url = "http://api.remarkets.primary.com.ar";
@@ -41,10 +41,10 @@ class jsRofex {
                         pCallback({status:"OK"});
                     } else {
                         if (!response || typeof(response) == "undefined") {
-                            pCallback({status:error});
+                            pCallback({status:"Error", detail:error});
                         } else {
                             if (typeof(response.headers) == "undefined" || typeof(response.headers['set-cookie']) == "undefined" || !response.headers['set-cookie']) {
-                                pCallback({status:error});
+                                pCallback({status:"Error", detail:error});
                             } else {
                                 token_int = response.headers['X-Auth-Token'].toString().split(";")[0];
                                 this.Entorno_token = token_int;
@@ -58,7 +58,7 @@ class jsRofex {
                 })
             );
         } catch (error) {
-            pCallback({status:error});
+            pCallback({status:"Error", detail:error});
         }
     }
 
@@ -66,14 +66,15 @@ class jsRofex {
     get_accounts(pCallback) {
         var new_url = this.base_url.concat("/rest/accounts");
         this.query_get(new_url, function(Id_accounts) {
-            if (Id_accounts != "error") {
-                this.accounts = Id_accounts;
-                console.log(Id_accounts);
-                pCallback(Id_accounts)
+            if (JSON.parse(Id_accounts).status == "OK") {
+                this.oContexto.accounts = JSON.parse(Id_accounts).accounts;
+                pCallback(Id_accounts);
             } else {
-                pCallback(Id_accounts)
+                pCallback(Id_accounts);
             }
-        });
+        }.bind({
+            oContexto: this
+        }));
     }
 
     query_get(new_url, Callback_get) {
@@ -89,11 +90,11 @@ class jsRofex {
                 if (!error && response.statusCode == 200) {
                     if (body.indexOf("j_spring_security_check") > 0) {
                         this.autenticado = false;
-                        pCallback({status:error});
+                        Callback_get({status:"Error", detail:error});
                     }
-                    Callback_get( body);
+                    Callback_get(body);
                 } else {
-                    Callback_get("The query returned an unexpected result.");
+                    Callback_get({status:"Error", detail:"The query returned an unexpected result."});
                 }
             });
     }
@@ -111,7 +112,7 @@ class jsRofex {
                 }
             }
         } else {
-            Callback_get("Invalid  type of 'request' parameter.");
+            Callback_get({status:"Error", detail:"Invalid  type of 'request' parameter."});
         }
         this.query_get(new_url, Callback_get);
     }
