@@ -202,8 +202,3 @@ fes.cancel_order(order_id = "310059219481980", proprietary = "PBCP", function(da
 
 El desarrollo de este software fue impulsado por [Primary](https://www.primary.com.ar/) como parte de una iniciativa de Código Abierto de [Grupo Rofex](https://www.rofex.com.ar/).
 
-#### Autores
-
-- Franco Basaldella
-- Flavio E. Spetale
-- Gabriel Koatz
