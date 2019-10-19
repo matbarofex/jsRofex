@@ -48,7 +48,7 @@ La inicialización se debe realizar en dos pasos. En el primer paso setea el amb
 
 Si la autenticación falla, la propiedad status del callback será “null”.
 
-`var fes = new jsRofex("reMarkets");
+```var fes = new jsRofex("reMarkets");
 
 fes.login(user="fes2019", password="xxyyzz", function(callback) {
     if (callback.status == "OK") {
@@ -62,4 +62,4 @@ fes.login(user="fes2019", password="xxyyzz", function(callback) {
 
 
 
-`
+```
