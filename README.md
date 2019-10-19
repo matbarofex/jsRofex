@@ -19,4 +19,5 @@ Para utilizar el paquete se debe tener credenciales de autenticación correctas 
 
 Para obtener nuevas credenciales:
 Remarket:  alta en [Remarket](https://remarkets.primary.ventures/index.html)
+
 Production: contacte al equipo de MPI (Market and Platform Integration, correo: <mpi@primary.com.ar>)
