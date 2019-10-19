@@ -59,8 +59,16 @@ fes.login(user="fes2019", password="xxyyzz", function(callback) {
         console.log(callback);
     }
 });
-
-
-
-
+```
+1. Obtiene todas las cuentas asociadas a mi usuario
+```
+fes.get_accounts(function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }});
+    
+{"status":"OK","accounts":[{"id":4500,"name":"FAB2019","brokerId":1,"status":true}]}
 ```
