@@ -12,14 +12,15 @@ Se recomienda leer la documentación oficial de la API para familiarizarse con l
 
 ## Instalación
 
-`import jsRofex;`
+`const jsRofex = require("./jsRofex.js");`
 
 ## Credenciales API
+
 Para utilizar el paquete se debe tener credenciales de autenticación correctas para el entorno.
 
 Para obtener nuevas credenciales:
 
-Remarket:  alta en [Remarket](https://remarkets.primary.ventures/index.html)
+Remarket: alta en [Remarket](https://remarkets.primary.ventures/index.html)
 
 Production: contacte al equipo de MPI (Market and Platform Integration, correo: <mpi@primary.com.ar>)
 
@@ -46,9 +47,11 @@ Todos los métodos retornan un diccionario de la respuesta `JSON`.
 
 La inicialización se debe realizar en dos pasos. En el primer paso setea el ambiente y en el segundo paso se autentifica con servidor de Rofex por medio usuario y contraseña. 
 
-Si la autenticación falla, la propiedad status del callback será “null”.
+Si la autenticación falla, la propiedad status del callback será “ERROR”.
 
 ```
+const jsRofex = require("./jsRofex.js");
+
 var fes = new jsRofex("reMarkets");
 
 fes.login(user="fes2019", password="xxyyzz", function(callback) {
