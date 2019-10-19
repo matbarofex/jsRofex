@@ -31,6 +31,17 @@ Nota: Antes de comenzar a usar el paquete se debe inicial izar el entorno con el
 
 ## Métodos disponibles
 
-Todos los métodos retornan un diccionario de la respuesta `JSON.`
+Todos los métodos retornan un diccionario de la respuesta `JSON`.
+
+- login: autentica al usuario en la API de Primary.
+- get_accounts:  obtiene las cuentas asociadas a un usuario.
+- get_instruments:  obtiene una lista de los Segmentos disponibles o una lista con todos los instrumentos disponibles para negociarse en ROFEX.
+- get_market_data: obtiene los datos del mercado en tiempo real.
+- send_order: envía una nueva orden al mercado.
+- cancel_order: cancela una orden.
+- get_order_status: obtiene el estado de una orden especifica.
+- get_all_orders_status:  obtiene el estado de las ordenes para una cuenta especifica.
+
+
 
 
