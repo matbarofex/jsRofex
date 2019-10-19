@@ -1,3 +1,4 @@
+const request = require("request");
 class jsRofex {
 
     constructor(pDominio) {
@@ -23,7 +24,7 @@ class jsRofex {
 
         var new_url = this.base_url.concat("/auth/getToken");
 
-        var request = require('request');
+        
         var token_int = "";
         try {
             request.post({
@@ -78,7 +79,7 @@ class jsRofex {
     }
 
     query_get(new_url, Callback_get) {
-        var request = require('request');
+        
 
         request.get({
                 headers: {
@@ -165,3 +166,5 @@ class jsRofex {
         this.query_get(new_url, Callback_get);
     }
 }
+
+module.exports = jsRofex;
