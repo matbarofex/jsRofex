@@ -42,6 +42,24 @@ Todos los métodos retornan un diccionario de la respuesta `JSON`.
 - get_order_status: obtiene el estado de una orden especifica.
 - get_all_orders_status:  obtiene el estado de las ordenes para una cuenta especifica.
 
+## Modo de uso
+
+La inicialización se debe realizar en dos pasos. En el primer paso setea el ambiente y en el segundo paso se autentifica con servidor de Rofex por medio usuario y contraseña. 
+
+Si la autenticación falla, la propiedad status del callback será “null”.
+
+`var fes = new jsRofex("reMarkets");
+
+fes.login(user="fes2019", password="xxyyzz", function(callback) {
+    if (callback.status == "OK") {
+        console.log("Connected Successfully");
+    } else {
+        console.log("Error in login process");
+        console.log(callback);
+    }
+});
 
 
 
+
+`
