@@ -28,7 +28,7 @@ Production: contacte al equipo de MPI (Market and Platform Integration, correo: 
 
 Esta sección describe la funcionalidad y los componentes del paquete para realizar solicitudes a la API REST y devolver la respuesta correspondiente.
 
-Nota: Antes de comenzar a usar el paquete se debe inicial izar el entorno con el que desea conectarse.
+Nota: Antes de comenzar a usar el paquete se debe inicializar el entorno con el que desea conectarse.
 
 ## Métodos disponibles
 
