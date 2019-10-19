@@ -85,6 +85,7 @@ fes.get_instruments(type_request="segments", sec_detailed = false, function(data
     
 {“status":"OK","segments":[{"marketSegmentId":"DDA","marketId":"ROFX"},{"marketSegmentId":"DDF","marketId":"ROFX"},{"marketSegmentId":"DUAL","marketId":"ROFX"},{"marketSegmentId":"TEST","marketId":"ROFX"},{"marketSegmentId":"MAE","marketId":"ROFX"},{"marketSegmentId":"MERV","marketId":"ROFX"},{"marketSegmentId":"MVR","marketId":"ROFX"},{"marketSegmentId":"MVC","marketId":"ROFX"},{"marketSegmentId":"MATBA","marketId":"ROFX"},{"marketSegmentId":"PTPExt","marketId":"ROFX"},{"marketSegmentId":"RFXI","marketId":"ROFX"},{"marketSegmentId":"UFEX","marketId":"ROFX"}]}
 ```
+
 3. Obtiene la lista de instrumentos disponibles
 ```
 fes.get_instruments(type_request = "securities", sec_detailed = false, function(data_get) {
@@ -98,6 +99,7 @@ fes.get_instruments(type_request = "securities", sec_detailed = false, function(
     
 {"status":"OK","instruments":[{"instrumentId":{"marketId":"ROFX","symbol":"SOJ.ROSMay20M"},"cficode":"FXXXSX"},{"instrumentId":{"marketId":"ROFX","symbol":"SOJ.ROSMay20 290c"},"cficode":"OCAFXS"},{"instrumentId":{"marketId":"ROFX","symbol":"TRI.ROS 12/01 19"},"cficode":"FXXXXX"},{"instrumentId":{"marketId":"ROFX","symbol":"MAI.ROSDic19 170c"},"cficode":"OCAFXS"},{"instrumentId":{"marketId":"ROFX","symbol":"SOJ.ROSEne20 205p"},"cficode":"OPAFXS"},{"instrumentId":{"marketId":"ROFX","symbol":"TRI.MINJul20"}, "cficode":"FXXXSX"},…]}
 ```
+
 4. Obtiene la lista detallada de los instrumentos disponibles
 ```
 fes.get_instruments(type_request = "securities", sec_detailed = true, function(data_get) {
@@ -112,3 +114,96 @@ fes.get_instruments(type_request = "securities", sec_detailed = true, function(d
 {"status":"OK", … , "instrumentId":{"marketId":"ROFX","symbol":"MERV - XMEV - A2E2 – 24hs"}},{"symbol":null,"segment":  {"marketSegmentId":"DDA","marketId":"ROFX"}, "lowLimitPrice":0.0, "highLimitPrice":1000000.0,"minPriceIncrement":0.100000, "minTradeVol":1.000000,"maxTradeVol":10.000000,"tickSize":1.000000,"contractMultiplier":100.000000,"roundLot":1.000000,"priceConvertionFactor":1.000000,"maturityDate":"20200323","currency":"USD","orderTypes":null,"timesInForce":null,"securityType":null,"settlType":null,"instrumentPricePrecision":1,"instrumentSizePrecision":0,"cficode":"FXXXSX","instrumentId":{"marketId":"ROFX", "symbol":"SOJ.ROSMar20"}}]}
 ```
 
+5. Obtiene los datos del mercado en tiempo real
+```
+fes.get_market_data(market_id = "ROFX", symbol = "RFX20Dic19", entries = ["BI", "OF", "LA"], depth = 1, function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }
+});
+    
+{"status":"OK","marketData":{"LA":{"price":45465,"size":1,"date":1571491925262},"OF":[{"price":45730,"size":1}],"BI":[{"price":45465,"size":4}]},"depth":1,"aggregated":true}
+```
+
+6. Obtiene las operaciones históricas para un instrumento dado
+```
+fes.get_trade_history(market_id = "ROFX", symbol = "RFX20Dic19", date_query = "2018-10-04", date_from = "", date_to = "", function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }
+});
+    
+{"status":"OK","symbol":"RFX20Dic19","market":"ROFX","trades":[]}
+```
+
+7. Enviar una nueva orden al mercado
+```
+fes.new_order(symbol = "RFX20Dic19", side = "Buy", quantity = 1, price = 47000.0, order_type = "Limit", time_in_force = "Day", iceberg = false, expire_date = null, display_quantity = null, account = "FAB2019", cancelPrev = false, function(data_get) {
+        if (JSON.parse(data_get).status == "OK") {
+            console.log(data_get);
+        } else {
+            console.log("Error:");
+            console.log(data_get);
+        }
+    });
+    
+{"status":"OK","order":{"clientId":"310059219481980","proprietary":"PBCP"}}
+```
+
+8. Obtiene el estado de una orden especifica
+```
+fes.get_order_status(lookup_type = "COID", order_id = "310059219481980", proprietary = "PBCP", function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }
+});
+    
+{"status":"OK","order":{"orderId":"138874950","clOrdId":"310059219481980","proprietary":"PBCP","execId":"T4890257","accountId":{"id":"FAB2019"}, "instrumentId":{"marketId":"ROFX","symbol":"RFX20Dic19"},"price":47000,"orderQty":1,"ordType":"LIMIT", "side":"BUY", "timeInForce":"DAY","transactTime":"20191019-12:33:39.289-0300","avgPx":45730.000, "lastPx":45730, "lastQty":1,"cumQty":1,"leavesQty":0,"status":"NEW","text":"Aceptada"}}
+```
+
+9. Obtiene el estado de las ordenes para una cuenta especifica
+```
+fes.get_all_orders_status(accountId = "FAB2019", function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }
+});
+    
+{"status":"OK","orders":[{"orderId":"138874950","clOrdId":"310059219481980","proprietary":"PBCP","execId":"T4890257","accountId":{"id":"FAB2019"}, "instrumentId":{"marketId":"ROFX","symbol":"RFX20Dic19"}, "price":47000,"orderQty":1,"ordType":"LIMIT", "side":"BUY","timeInForce":"DAY","transactTime":"20191019-12:33:39.289-0300","avgPx":0,"lastPx":0,"lastQty":0,"cumQty":0, "leavesQty":1,"status":"NEW","text":"Aceptada"}]}
+```
+
+10. Cancelar una orden especifica
+```
+fes.cancel_order(order_id = "310059219481980", proprietary = "PBCP", function(data_get) {
+    if (JSON.parse(data_get).status == "OK") {
+        console.log(data_get);
+    } else {
+        console.log("Error:");
+        console.log(data_get);
+    }
+});
+
+{"status":"OK","order":{"clientId":"310060290499141","proprietary":"PBCP"}}
+```
+
+## Agradecimientos
+
+El desarrollo de este software fue impulsado por [Primary](https://www.primary.com.ar/) como parte de una iniciativa de Código Abierto de [Grupo Rofex](https://www.rofex.com.ar/).
+
+#### Autores
+
+- Franco Basaldella
+- Flavio E. Spetale
+- Gabriel Koatz
