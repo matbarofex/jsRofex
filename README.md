@@ -54,12 +54,12 @@ const jsRofex = require("./jsRofex.js");
 
 var fes = new jsRofex("reMarkets");
 
-fes.login(user="fes2019", password="xxyyzz", function(callback) {
-    if (callback.status == "OK") {
+fes.login(user="fes2019", password="xxyyzz", function(rta) {
+    if (rta.status == "OK") {
         console.log("Connected Successfully");
     } else {
         console.log("Error in login process");
-        console.log(callback);
+        console.log(rta);
     }
 });
 ```
