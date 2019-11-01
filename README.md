@@ -201,6 +201,42 @@ fes.cancel_order(order_id = "310059219481980", proprietary = "PBCP", function(da
 {"status":"OK","order":{"clientId":"310060290499141","proprietary":"PBCP"}}
 ```
 
+11. Conectarse por Web Socket
+
+```
+rofex_iniciarWS(user="fes2019", password="xxyyzz", function(pTk) {
+    if (pTk != "error") {
+        socketRofex = new WebSocket("ws://api.remarkets.primary.com.ar/", null, { headers: { Cookie:   pTk } });
+        socketRofex.on('open', function open() {
+            suscribir(pedido);});
+        socketRofex.on('error', function(e) {
+            console.log("error de scoket", e);
+        });
+        socketRofex.on('message', function(data, flags) {
+            try {
+                var p = JSON.parse(data);
+                console.log("socketRofex on message", p);
+            } catch (error) {
+                console.log(error);}
+        });
+    } else {
+        console.log("Error in login process");
+        console.log(pLogin);
+    }});
+
+
+socketRofex on message { type: 'Md',
+  timestamp: 1572635234484,
+  instrumentId: { marketId: 'ROFX', symbol: 'RFX20Dic19' },
+  marketData: 
+   { LA: { price: 49210, size: 3, date: 1572635216341 },
+     OF: [ [Object], [Object], [Object], [Object], [Object] ],
+     IV: null,
+     OI: { size: 95, date: 1569456000000 },
+     BI: [ [Object], [Object], [Object], [Object], [Object] ],
+     NV: 1886 }}
+```
+
 ## Agradecimientos
 
 El desarrollo de este software fue impulsado por [Primary](https://www.primary.com.ar/) como parte de una iniciativa de Código Abierto de [Grupo Rofex](https://www.rofex.com.ar/).
