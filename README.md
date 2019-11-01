@@ -259,9 +259,8 @@ rofex_iniciarWS(user="fes2019", password="xxyyzz", function(pTk) {
         console.log("Error in login process");
         console.log(pLogin);
     }});
-
-
-socketRofex on message { type: 'Md',
+```
+`Salida { type: 'Md',
   timestamp: 1572635234484,
   instrumentId: { marketId: 'ROFX', symbol: 'RFX20Dic19' },
   marketData: 
@@ -270,8 +269,8 @@ socketRofex on message { type: 'Md',
      IV: null,
      OI: { size: 95, date: 1569456000000 },
      BI: [ [Object], [Object], [Object], [Object], [Object] ],
-     NV: 1886 }}
-```
+     NV: 1886 }}`
+
 
 ## Agradecimientos
 
