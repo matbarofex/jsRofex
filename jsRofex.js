@@ -67,8 +67,13 @@ class jsRofex {
     get_accounts(pCallback) {
         var new_url = this.base_url.concat("/rest/accounts");
         this.query_get(new_url, function(Id_accounts) {
-            if (JSON.parse(Id_accounts).status == "OK") {
-                this.oContexto.accounts = JSON.parse(Id_accounts).accounts;
+        var oId_accounts;
+        if (typeof Id_accounts == "string") {
+            oId_accounts =JSON.parse(Id_accounts);}else{
+                oId_accounts = Id_accounts;}
+
+        if (oId_accounts.status == "OK") {
+                this.oContexto.accounts = oId_accounts.accounts;
                 pCallback(Id_accounts);
             } else {
                 pCallback(Id_accounts);
