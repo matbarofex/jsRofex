@@ -50,7 +50,7 @@ La inicialización se debe realizar en dos pasos. En el primer paso setea el amb
 Si la autenticación falla, la propiedad status del callback será “ERROR”.
 
 ```
-var jsRofex = require("rubikia_rofex") ;
+var jsRofex = require("jsRofex");
 
 var fes = new jsRofex("reMarkets");
 
