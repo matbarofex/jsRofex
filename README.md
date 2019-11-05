@@ -12,7 +12,7 @@ Se recomienda leer la documentación oficial de la API para familiarizarse con l
 
 ## Instalación
 
-`const jsRofex = require("./jsRofex.js");`
+`npm i jsRofex;`
 
 ## Credenciales API
 
@@ -50,7 +50,7 @@ La inicialización se debe realizar en dos pasos. En el primer paso setea el amb
 Si la autenticación falla, la propiedad status del callback será “ERROR”.
 
 ```
-const jsRofex = require("./jsRofex.js");
+var jsRofex = require("rubikia_rofex") ;
 
 var fes = new jsRofex("reMarkets");
 
