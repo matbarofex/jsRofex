@@ -12,7 +12,7 @@ Se recomienda leer la documentación oficial de la API para familiarizarse con l
 
 ## Instalación
 
-`npm i jsRofex;`
+`npm install jsrofex;`
 
 ## Credenciales API
 
