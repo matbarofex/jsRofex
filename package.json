@@ -1,0 +1,17 @@
+{
+  "name": "rofexjs",
+  "version": "1.0.1",
+  "description": "--- # Documentación Rofexjs ---",
+  "main": "Rofexjs.js",
+  "dependencies": {
+    "request": "^2.88.0",
+    "ws": "^7.2.0",
+    "websocket": "^1.0.30"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
