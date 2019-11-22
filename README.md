@@ -4,9 +4,9 @@
 
 ## Descripción general
 
-jsRofex es un paquete de Javascript que permite interacciones con las API Rest de ROFEX.
+jsRofex es un paquete de Javascript que permite interacciones con las API Rest de Matba Rofex.
 
-El paquete está diseñado para facilitar a los desarrolladores la conexión con las API de ROFEX y que su objetivo sea la programación de las operaciones a realizar.
+El paquete está diseñado para facilitar a los desarrolladores la conexión con las API de Matba Rofex y que su objetivo sea la programación de las operaciones a realizar.
 
 Se recomienda leer la documentación oficial de la API para familiarizarse con las respuestas y la funcionalidad de la API.
 
@@ -36,7 +36,7 @@ Todos los métodos retornan un diccionario de la respuesta `JSON`.
 
 - login: autentica al usuario en la API de Primary.
 - get_accounts:  obtiene las cuentas asociadas a un usuario.
-- get_instruments:  obtiene una lista de los Segmentos disponibles o una lista con todos los instrumentos disponibles para negociarse en ROFEX.
+- get_instruments:  obtiene una lista de los Segmentos disponibles o una lista con todos los instrumentos disponibles para negociarse en Matba Rofex.
 - get_market_data: obtiene los datos del mercado en tiempo real.
 - send_order: envía una nueva orden al mercado.
 - cancel_order: cancela una orden.
@@ -45,7 +45,7 @@ Todos los métodos retornan un diccionario de la respuesta `JSON`.
 
 ## Modo de uso
 
-La inicialización se debe realizar en dos pasos. En el primer paso setea el ambiente y en el segundo paso se autentifica con servidor de Rofex por medio usuario y contraseña. 
+La inicialización se debe realizar en dos pasos. En el primer paso setea el ambiente y en el segundo paso se autentifica con servidor de Matba Rofex por medio usuario y contraseña. 
 
 Si la autenticación falla, la propiedad status del callback será “ERROR”.
 
@@ -274,5 +274,5 @@ rofex_iniciarWS(user="fes2019", password="xxyyzz", function(pTk) {
 
 ## Agradecimientos
 
-El desarrollo de este software fue impulsado por [Primary](https://www.primary.com.ar/) como parte de una iniciativa de Código Abierto de [Grupo Rofex](https://www.rofex.com.ar/).
+El desarrollo de este software fue impulsado por [Primary](https://www.primary.com.ar/) como parte de una iniciativa de Código Abierto de [Matba Rofex](https://www.rofex.com.ar/).
 
