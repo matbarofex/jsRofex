@@ -8,7 +8,7 @@ class jsRofex {
         this.accounts = {};
         if (pDominio == "reMarkets" || pDominio == "production") {
             if (pDominio == "reMarkets") {
-                this.base_url = "http://api.remarkets.primary.com.ar";
+                this.base_url = "https://api.remarkets.primary.com.ar";
             } else {
                 if (pDominio == "production") {
                     this.base_url = "https://api.primary.com.ar";
