@@ -1,6 +1,6 @@
 {
-  "name": "rofexjs",
-  "version": "1.1.3",
+  "name": "jsrofex",
+  "version": "1.1.4",
   "description": "--- # Documentación Rofexjs ---",
   "main": "Rofexjs.js",
   "dependencies": {
