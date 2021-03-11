@@ -206,28 +206,51 @@ fes.cancel_order(order_id = "310059219481980", proprietary = "PBCP", function(da
 var socketRofex;
 var request = require('request');
 var WebSocket = require('ws');
-var base_url = "http://api.remarkets.primary.com.ar/";
+var base_url = "https://api.primary.com.ar/";
 
 function rofex_iniciarWS(pUsuario, pClave, pCallback) {
     try {
 
         request.post(
-            base_url + "j_spring_security_check?j_username=" + pUsuario + "&j_password=" + pClave, { form: { key: 'value' } },
+            request.post({url: base_url + "auth/getToken", headers: {'X-Username': pUsuario,'X-Password': pClave}},
             function(error, response, body) {
-                if (!error && response.statusCode == 200) {} else {
+                if (!error && response.statusCode == 200) {
+                    var token = response.headers['x-auth-token'].toString();
+                            pCallback(token);
+                } else {
                     if (!response || typeof(response) == "undefined") {
                         pCallback("error");
                     } else {
                         if (typeof(response.headers) == "undefined" || typeof(response.headers['set-cookie']) == "undefined" || !response.headers['set-cookie']) {
                             pCallback("error");
                         } else {
-                            var token = response.headers['set-cookie'].toString().split(";")[0];
+                            var token = response.headers['x-auth-token'].toString();
                             pCallback(token);
-                        }}}});
+                        }}}}));
     } catch (error) {
         pCallback("error");
     }
 }
+
+rofex_iniciarWS(user="userXXX", password="XXXXXX", function(pTk) {
+    if (pTk != "error") {
+        socketRofex = new WebSocket("wss://api.primary.com.ar/", null, { headers: { 'x-auth-token':   pTk } });
+        socketRofex.on('open', function open() {
+            suscribir(pedido);});
+        socketRofex.on('error', function(e) {
+            console.log("error de socket", e);
+        });
+        socketRofex.on('message', function(data, flags) {
+            try {
+                var p = JSON.parse(data);
+                console.log("socketRofex on message", p);
+            } catch (error) {
+                console.log(error);}
+        });
+    } else {
+        console.log("Error in login process");
+        //console.log(pLogin);
+    }});
 
 function suscribir(datos){
     if (socketRofex && socketRofex.readyState == 1) {
@@ -235,14 +258,14 @@ function suscribir(datos){
         console.log("Conectado con socketRofex", JSON.stringify(datos), socketRofex.readyState);}
    }
 
-var simbolosProd = [{ symbol: "RFX20Dic19", marketId: "ROFX" },{ symbol: "DODic19", marketId: "ROFX" }];
+var simbolosProd = [{ symbol: "DOJun21", marketId: "ROFX" },{ symbol: "DODic21", marketId: "ROFX" }];
 
 var pedido = {"type": "smd", "level": 1, "entries": ["BI", "OF", "LA", "IV","NV","OI"],
     "products": simbolosProd, "depth": 10 };
 
-rofex_iniciarWS(user="fes2019", password="xxyyzz", function(pTk) {
+rofex_iniciarWS(user="userXXXX", password="XXXXXX", function(pTk) {
     if (pTk != "error") {
-        socketRofex = new WebSocket("ws://api.remarkets.primary.com.ar/", null, { headers: { Cookie:   pTk } });
+        socketRofex = new WebSocket("wss://api.primary.com.ar/", null, { headers: { 'x-auth-token':   pTk } });
         socketRofex.on('open', function open() {
             suscribir(pedido);});
         socketRofex.on('error', function(e) {
@@ -257,20 +280,9 @@ rofex_iniciarWS(user="fes2019", password="xxyyzz", function(pTk) {
         });
     } else {
         console.log("Error in login process");
-        console.log(pLogin);
+        //console.log(pLogin);
     }});
 ```
-`Salida { type: 'Md',
-  timestamp: 1572635234484,
-  instrumentId: { marketId: 'ROFX', symbol: 'RFX20Dic19' },
-  marketData: 
-   { LA: { price: 49210, size: 3, date: 1572635216341 },
-     OF: [ [Object], [Object], [Object], [Object], [Object] ],
-     IV: null,
-     OI: { size: 95, date: 1569456000000 },
-     BI: [ [Object], [Object], [Object], [Object], [Object] ],
-     NV: 1886 }}`
-
 
 ## Agradecimientos
 
