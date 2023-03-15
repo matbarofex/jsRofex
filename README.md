@@ -12,7 +12,7 @@ Se recomienda leer la documentación oficial de la API para familiarizarse con l
 
 ## Instalación
 
-`npm install rofexjs;`
+`npm i https://github.com/matbarofex/jsRofex`
 
 ## Credenciales API
 
